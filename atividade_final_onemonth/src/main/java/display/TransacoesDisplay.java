@@ -26,7 +26,6 @@ public class TransacoesDisplay extends JFrame {
         );
 
 
-
         JPanel painel = new JPanel(
                 new GridLayout(4, 2, 15, 15)
         );
@@ -96,12 +95,10 @@ public class TransacoesDisplay extends JFrame {
                 new BotaoArredondado("Registrar");
 
 
-
         painel.add(btnSalvar);
 
 
         painel.add(new JLabel(""));
-
 
 
         add(painel);
@@ -114,8 +111,7 @@ public class TransacoesDisplay extends JFrame {
             try {
 
 
-                Transacoes t =
-                        new Transacoes();
+                Transacoes t = new Transacoes();
 
 
 
@@ -148,21 +144,34 @@ public class TransacoesDisplay extends JFrame {
 
 
 
-                new TransacoesDAO()
-                        .realizarTransacao(t);
+                boolean sucesso = new TransacoesDAO().realizarTransacao(t);
 
 
 
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Movimentação registrada com sucesso!"
-                );
+                if(sucesso){
 
 
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Movimentação registrada com sucesso!"
+                    );
 
-                txtQuantidade.setText("");
 
-                txtProduto.setText("");
+                    txtQuantidade.setText("");
+
+                    txtProduto.setText("");
+
+
+                }else{
+
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Erro: quantidade maior que o estoque disponível ou produto inexistente!"
+                    );
+
+
+                }
 
 
 
